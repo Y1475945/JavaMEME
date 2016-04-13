@@ -1,20 +1,44 @@
 package server;
 
 public class VideoFile {
+	private String id, title, filename;
 
-	public Object getID() {
-		// TODO Auto-generated method stub
-		return "id";
+	public VideoFile() {
+		this.id = null;
+		this.title = null;
+		this.filename = null;
 	}
 
-	public Object getTitle() {
-		// TODO Auto-generated method stub
-		return "title";
+	public VideoFile(String id, String title, String filename) {
+		this.id = id;
+		this.title = title;
+		this.filename = filename;
 	}
 
-	public Object getFilename() {
+	public String getID() {
 		// TODO Auto-generated method stub
-		return "filename";
+		return id;
 	}
 
+	public String getTitle() {
+		// TODO Auto-generated method stub
+		return title;
+	}
+
+	public String getFilename() {
+		// TODO Auto-generated method stub
+		return filename;
+	}
+
+	public void setID(String attributeValue) {
+		this.id = attributeValue;
+	}
+
+	public void setTitle(String newContent) {
+		this.title = newContent;
+	}
+
+	public void setFilename(String newContent) {
+		this.filename = newContent;
+	}
 }
