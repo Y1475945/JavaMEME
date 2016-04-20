@@ -1,6 +1,9 @@
 package server;
 
-public class VideoFile {
+import java.io.*;
+import java.util.regex.Pattern;
+
+public class VideoFile implements Serializable {
 	private String id, title, filename;
 
 	public VideoFile() {
@@ -40,5 +43,11 @@ public class VideoFile {
 
 	public void setFilename(String newContent) {
 		this.filename = newContent;
+	}
+
+	public Boolean checkValid() {
+		//Pattern validIDFormat = Pattern.compile("\d{8}\p{Lower}\d");
+		//String[] validVideoFiletypes = {"*.mp4","*.mpg"};
+		return false;
 	}
 }
