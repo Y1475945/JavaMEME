@@ -48,6 +48,10 @@ public class VideoFile implements Serializable {
 	public Boolean checkValid() {
 		//Pattern validIDFormat = Pattern.compile("\d{8}\p{Lower}\d");
 		//String[] validVideoFiletypes = {"*.mp4","*.mpg"};
-		return false;
+		return true;
+	}
+	
+	public String toString() {
+		return this.getTitle();
 	}
 }
