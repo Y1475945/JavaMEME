@@ -114,7 +114,7 @@ public class Server {
 		MediaPlayerFactory mediaPlayerFactory = new MediaPlayerFactory(selection.getFilename());
 		HeadlessMediaPlayer mediaPlayer = mediaPlayerFactory.newHeadlessMediaPlayer();
 		String options = formatRtpStream(serverAddress, 5555);
-		String media = selection.getFilename();
+		String media = "./videoFiles/" + selection.getFilename();
 		mediaPlayer.playMedia(media, options, ":no-sout-rtp-sap",":no-sout-standardsap", ":sout-all", ":sout-keep");
 		// Continue running - "join" waits for current executing thread to finish
 		try {
@@ -146,6 +146,6 @@ public class Server {
 	}
 
 	public static void main(String[] args) {
-		new Server("videoList.xml");
+		new Server("videoLists/videoList.xml");
 	}
 }
