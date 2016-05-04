@@ -29,18 +29,19 @@ public class Server {
 	public List<VideoFile> videoList;
 	String serverAddress = "127.0.0.1";
 
-	public Server() {
+	public Server(String videoListPath) {
 		String vlcLibraryPath = "M:/GitHub/JavaMEME/vlc-2.0.1";
 	    
 		NativeLibrary.addSearchPath(RuntimeUtil.getLibVlcLibraryName(),vlcLibraryPath);
 		Native.loadLibrary(RuntimeUtil.getLibVlcLibraryName(), LibVlc.class);
-		myReader = new XMLReader("videoList.xml");
+		myReader = new XMLReader(videoListPath);
 		
 		Thread socketThread = new Thread("Socket") {
 			//VideoFile videoToStream = new VideoFile();
 			
 			@Override
 			public void run() {
+				System.out.println("Thread Running");
 				try {
 					VideoFile selection = null;
 					openSocket();
@@ -50,7 +51,7 @@ public class Server {
 						clientSocket.close();
 						serverSocket.close();
 						System.out.println("Server: Client connection closed");
-						streamVideoToClient(selection);
+						broadcastSelectedVideo(selection);
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
@@ -63,6 +64,7 @@ public class Server {
 					System.out.println("ERROR on socket connection.");
 					e.printStackTrace();
 				}
+				System.out.println("Thread Ending");
 			}
 		};
 		socketThread.start();
@@ -108,7 +110,7 @@ public class Server {
 		return selection;
 	}
 
-	public void streamVideoToClient(VideoFile selection) {
+	public void broadcastSelectedVideo(VideoFile selection) {
 		MediaPlayerFactory mediaPlayerFactory = new MediaPlayerFactory(selection.getFilename());
 		HeadlessMediaPlayer mediaPlayer = mediaPlayerFactory.newHeadlessMediaPlayer();
 		String options = formatRtpStream(serverAddress, 5555);
@@ -144,6 +146,6 @@ public class Server {
 	}
 
 	public static void main(String[] args) {
-		new Server();
+		new Server("videoList.xml");
 	}
 }

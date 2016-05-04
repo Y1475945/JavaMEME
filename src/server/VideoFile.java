@@ -1,6 +1,7 @@
 package server;
 
 import java.io.*;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class VideoFile implements Serializable {
@@ -46,9 +47,17 @@ public class VideoFile implements Serializable {
 	}
 
 	public Boolean checkValid() {
-		//Pattern validIDFormat = Pattern.compile("\d{8}\p{Lower}\d");
-		//String[] validVideoFiletypes = {"*.mp4","*.mpg"};
-		return true;
+		Boolean result = true;
+		Pattern idPattern = Pattern.compile("\\d{8}\\p{Lower}\\d");
+		Pattern filenamePattern = Pattern.compile("\\p{ASCII}{1,}.mp4|\\p{ASCII}{1,}.mpg");
+		Matcher idMatcher = idPattern.matcher(this.id);
+		Matcher filenameMatcher = filenamePattern.matcher(this.filename);
+		
+		result &= (this.title != null);
+		result &= idMatcher.matches();
+		result &= filenameMatcher.matches();
+		
+		return result;
 	}
 	
 	public String toString() {

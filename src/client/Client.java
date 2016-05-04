@@ -112,7 +112,14 @@ public class Client extends JFrame implements ActionListener {
 		mainFrame.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				mediaPlayerComponent.release();				
+				mediaPlayerComponent.release();
+				try {
+					serverSocket.close();
+					System.out.println("Client : Connection closed");
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 
