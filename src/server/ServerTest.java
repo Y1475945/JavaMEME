@@ -10,7 +10,7 @@ public class ServerTest {
 	Server myServer;
 	@Before
 	public void setUp() throws Exception {
-		myServer = new Server("videoList.xml");
+		myServer = new Server("videoLists/videoList.xml");
 	}
 
 	@Test
